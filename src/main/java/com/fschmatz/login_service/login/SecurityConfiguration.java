@@ -23,7 +23,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
             .formLogin()
             .loginPage("/login").permitAll()
-            .defaultSuccessUrl("/oi", true)
+            .defaultSuccessUrl("https://arstechnica.com/", true)
             .and()
             .logout()
             .and().httpBasic();
@@ -37,8 +37,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     //chave
-    public static void main(String[] args) {
-        System.out.println(new BCryptPasswordEncoder().encode("rambo"));
-    }
+    /*public static void main(String[] args) {
+        System.out.println(new BCryptPasswordEncoder().encode(""));
+    }*/
 
 }

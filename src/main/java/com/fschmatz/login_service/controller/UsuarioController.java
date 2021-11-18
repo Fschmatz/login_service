@@ -2,19 +2,19 @@ package com.fschmatz.login_service.controller;
 
 
 import com.fschmatz.login_service.entity.Usuario;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.fschmatz.login_service.repository.UsuarioRepository;
-
 import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
 @Transactional
-@RequestMapping("/login")
+//@RequestMapping("/loginservice")
 public class UsuarioController {
 
     UsuarioRepository repository;
@@ -26,7 +26,7 @@ public class UsuarioController {
     }*/
 
     //PAGINA PRINCIPAL
-    @GetMapping("/")
+    @GetMapping("/login")
     public String homePage() {
         return "login";
     }
