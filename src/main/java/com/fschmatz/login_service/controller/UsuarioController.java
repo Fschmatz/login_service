@@ -14,19 +14,13 @@ import java.util.Optional;
 @Controller
 @AllArgsConstructor
 @Transactional
-//@RequestMapping("/loginservice")
+@RequestMapping("/login")
 public class UsuarioController {
 
     UsuarioRepository repository;
 
-    /*//LOGIN
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }*/
-
     //PAGINA PRINCIPAL
-    @GetMapping("/login")
+    @GetMapping("/")
     public String homePage() {
         return "login";
     }
@@ -35,15 +29,15 @@ public class UsuarioController {
     //http://localhost:9093/login/1/2             !!! tem 2 "eu" não usar
     //checar usuario e retornar true or false
     @RequestMapping ("/{login}/{senha}")
-    public Boolean login(@PathVariable("login") String login, @PathVariable("senha") String senha, Model model){
+    public String login(@PathVariable("login") String login, @PathVariable("senha") String senha, Model model){
 
         Optional<Usuario> existingUsuarioLogin = repository.findByLogin(login);
         if(existingUsuarioLogin.get().getSenha().equals(senha)){
             System.out.println("ok");
-            return true;
+            return "teste";
         }
         System.out.println("nope");
-        return false;
+        return "ERROU!";
 
         /* if (existingUsuarioLogin.get().getSenha().isEmpty()) {
             return "OK achou";
@@ -55,11 +49,4 @@ public class UsuarioController {
         System.out.println("LOGIN --> "+existingUsuarioLogin.get().getLogin());
         System.out.println("SENHA --> "+existingUsuarioLogin.get().getSenha());*/
     }
-
-    @RequestMapping ("/oi")
-    public String oi(){
-        return "oi";
-    }
-
-
 }
