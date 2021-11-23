@@ -38,8 +38,10 @@ public class UsuarioController {
 
         if(existingUsuarioLogin.getSenha().equals(usuario.getSenha())){
             System.out.println("ok");
-            return "teste";
+            return "redirect:http://localhost:9091/usuario/homeUsuario/"+existingUsuarioLogin.getId_usuario();
         }
         return "Usuario não encontrado";
     }
 }
+
+//http://localhost:9091/usuario/homeUsuario/
