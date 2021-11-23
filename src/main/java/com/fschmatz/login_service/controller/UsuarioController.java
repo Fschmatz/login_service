@@ -6,8 +6,12 @@ import com.fschmatz.login_service.entity.Usuario;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.fschmatz.login_service.repository.UsuarioRepository;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import javax.transaction.Transactional;
 import java.util.Optional;
 
@@ -25,28 +29,17 @@ public class UsuarioController {
         return "login";
     }
 
+    //http://localhost:9093/login/1/2          para testes
+    @PostMapping("/loginUser")
+    public String login(@Validated Usuario usuario, BindingResult result, RedirectAttributes attributesl){
 
-    //http://localhost:9093/login/1/2             !!! tem 2 "eu" não usar
-    //checar usuario e retornar true or false
-    @RequestMapping ("/{login}/{senha}")
-    public String login(@PathVariable("login") String login, @PathVariable("senha") String senha, Model model){
+        Usuario existingUsuarioLogin = repository.findByLogin(usuario.getLogin());
+        System.out.println("USARIO LOGIN --> "+existingUsuarioLogin.toString());
 
-        Optional<Usuario> existingUsuarioLogin = repository.findByLogin(login);
-        if(existingUsuarioLogin.get().getSenha().equals(senha)){
+        if(existingUsuarioLogin.getSenha().equals(usuario.getSenha())){
             System.out.println("ok");
             return "teste";
         }
-        System.out.println("nope");
-        return "ERROU!";
-
-        /* if (existingUsuarioLogin.get().getSenha().isEmpty()) {
-            return "OK achou";
-        }
-
-        return "redirect:https://g1.globo.com/";*/
-
-        /*System.out.println("NOME --> "+existingUsuarioLogin.get().getNome());
-        System.out.println("LOGIN --> "+existingUsuarioLogin.get().getLogin());
-        System.out.println("SENHA --> "+existingUsuarioLogin.get().getSenha());*/
+        return "Usuario não encontrado";
     }
 }
