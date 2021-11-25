@@ -56,7 +56,7 @@ public class LoginController {
 
         if(existingUsuarioLogin.getSenha().equals(usuario.getSenha())){
             System.out.println("ok");
-            return "redirect:http://localhost:9090/usuario/homeUsuario/"+existingUsuarioLogin.getId_usuario();
+            return "redirect:http://localhost:9090/evento/listarTodosEventosFazerCheckin/"+existingUsuarioLogin.getId_usuario();
         }
         return "Usuario não encontrado";
     }
