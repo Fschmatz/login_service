@@ -19,7 +19,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @Transactional
 @RequestMapping("/login")
-public class UsuarioController {
+public class LoginController {
 
     UsuarioRepository repository;
 
@@ -29,9 +29,27 @@ public class UsuarioController {
         return "login";
     }
 
+    @GetMapping("/checkin")
+    public String checkinPage() {
+        return "checkLogin";
+    }
+
     //http://localhost:9093/login/1/2          para testes
     @PostMapping("/loginUser")
     public String login(@Validated Usuario usuario, BindingResult result, RedirectAttributes attributesl){
+
+        Usuario existingUsuarioLogin = repository.findByLogin(usuario.getLogin());
+        System.out.println("USARIO LOGIN --> "+existingUsuarioLogin.toString());
+
+        if(existingUsuarioLogin.getSenha().equals(usuario.getSenha())){
+            System.out.println("ok");
+            return "redirect:http://localhost:9090/usuario/homeUsuario/"+existingUsuarioLogin.getId_usuario();
+        }
+        return "Usuario não encontrado";
+    }
+
+    @PostMapping("/loginUserCheckin")
+    public String loginUserCheckin(@Validated Usuario usuario, BindingResult result, RedirectAttributes attributesl){
 
         Usuario existingUsuarioLogin = repository.findByLogin(usuario.getLogin());
         System.out.println("USARIO LOGIN --> "+existingUsuarioLogin.toString());

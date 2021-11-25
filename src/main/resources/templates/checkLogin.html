@@ -18,15 +18,9 @@
             text-align: center;
             margin: auto;
         }
-        .btn-large#checkinButton{
-            background: coral;
-            position:absolute;
-            top:10px;
-            right:30px;
-        }
     </style>
 
-    <title>Login</title>
+    <title>Check-In</title>
 
 </head>
 <body>
@@ -34,10 +28,6 @@
 <!-- Main Navigation -->
 <nav class="navbar navbar-expand-md navbar-dark">
     <a class="navbar-brand">Fschmatz Eventos LLC</a>
-    <p>
-        <a id="checkinButton" th:href="@{http://localhost:9090/login/checkin}"
-           class="btn btn-large btn-success">Sistema de Check-In</a>
-    </p>
 </nav>
 
 <!-- Content Section -->
@@ -49,10 +39,10 @@
 
                 <div align="center">
                     <br><br>
-                    <h1>Bem Vindo</h1>
+                    <h1>Olá</h1>
                 </div>
 
-                <form th:action="@{/login/loginUser}" method="post">
+                <form th:action="@{/login/loginUserCheckin}" method="post">
 
                     <!-- error message -->
                     <div th:if="${param.error}">
